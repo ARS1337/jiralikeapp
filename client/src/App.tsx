@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'antd/dist/antd.css';
+import LoginForm from './components/LoginForm/';
+import { Col, Layout, Row } from 'antd';
+import ProjectList from './components/ProjectPage';
+
+const { Header, Footer, Content } = Layout;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{height:'100vh', backgroundColor:'#f0f2f5'}}>
+      <Layout>
+        <Header style={{backgroundColor:'#d9dce6'}}>Jeera</Header>
+        <Content>
+          <Row>
+            <Col xs={24} sm={24} lg={{span:20,offset:2}} >
+              {/* <LoginForm /> */}
+              <ProjectList userType="admin" users={[]}/>
+            </Col>
+          </Row>
+        </Content>
+      </Layout>
     </div>
   );
 }
