@@ -5,38 +5,30 @@ import { UploadOutlined } from "@ant-design/icons";
 import { HighlightOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 import { userDataSource } from "../../utils/userData";
+import { UploadProps } from 'antd/es/upload/Upload';
 const { Paragraph } = Typography;
 
 function UserTable() {
-  const props: any = {
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    onChange({ file, fileList }: { file: { status: string }; fileList: {} }) {
+  const props: UploadProps = {
+    action: "http://localhost:3001/upload",
+    name: 'sampleFile',
+    defaultFileList: [
+    ],
+    onChange({ file, fileList }) {
       if (file.status !== "uploading") {
         console.log(file, fileList);
       }
+      file.url = "http://localhost:3001/" + file.name;
+      //download the file as follows: get a event from the client to download the file, download the file temporarily and send that file after getting the confirmation 
+      // of download, delte that file from temp location
     },
-    defaultFileList: [
-      {
-        uid: "1",
-        name: "xxx.png",
-        status: "done",
-        response: "Server Error 500", // custom error message to show
-        url: "http://www.baidu.com/xxx.png",
-      },
-      {
-        uid: "2",
-        name: "yyy.png",
-        status: "done",
-        url: "http://www.baidu.com/yyy.png",
-      },
-      {
-        uid: "3",
-        name: "zzz.png",
-        status: "error",
-        response: "Server Error 500", // custom error message to show
-        url: "http://www.baidu.com/zzz.png",
-      },
-    ],
+    onDownload(file) {
+      console.log("ondownload clicked", file)
+    },
+    onRemove(file) {
+      console.log("onremove", file)
+      //call server to remove the file from hosting
+    }
   };
 
   const userColumns = [
@@ -49,7 +41,7 @@ function UserTable() {
       title: "Progress",
       dataIndex: "progress",
       key: "progress",
-      render: () => {
+      render: (progress:number) => {
         return (
           <>
             <Progress
@@ -58,7 +50,7 @@ function UserTable() {
                 "0%": "#108ee9",
                 "100%": "#87d068",
               }}
-              percent={88}
+              percent={progress}
               width={44}
             />
           </>
@@ -75,22 +67,23 @@ function UserTable() {
       dataIndex: "comments",
       key: "comments",
       render: (comments: []) => {
-        return comments.map((x: { userName: string; comment: string }) => {
-          return (
-            <>
-              <Paragraph
-                editable={{
-                  icon: <HighlightOutlined />,
-                  tooltip: "click to edit ",
-                }}
-                style={{ wordBreak: "break-word" }}
-              >
-                {x.userName} : {x.comment}
-              </Paragraph>
-              <br />
-            </>
-          );
-        });
+        return (
+          <>
+            {comments.map((x: { userName: string; comment: string }) => {
+              return (
+                <>
+                  <Paragraph
+
+                    style={{ wordBreak: "break-word" }}
+                  >
+                    {x.userName} : {x.comment}
+                  </Paragraph>
+                  <br />
+                </>
+              );
+            }
+            )}
+          </>)
       },
     },
     {
@@ -103,10 +96,6 @@ function UserTable() {
           return (
             <>
               <Paragraph
-                editable={{
-                  icon: <HighlightOutlined />,
-                  tooltip: "click to edit ",
-                }}
                 style={{ wordBreak: "break-word" }}
               >
                 {x.keyName} : {x.keyValue}
@@ -130,6 +119,17 @@ function UserTable() {
           </>
         );
       },
+    },
+    {
+      title: 'User',
+      key: 'userAction',
+      render: (text: unknown, record: {}) => {
+        return (
+          <>
+            <Button type="link">Add comments</Button>
+          </>
+        )
+      }
     },
   ];
 

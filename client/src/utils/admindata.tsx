@@ -1,4 +1,6 @@
-const adminDataSource = [
+import { NewProjectProps } from "../components/NewProject/NewProject";
+
+const adminDataSource:NewProjectProps['data'][] = [
   {
     name: "project1",
     assignedTo: "abhay",
@@ -12,6 +14,7 @@ const adminDataSource = [
       { keyName: "key1", keyValue: "fgdsfdfsfsdfsdsf" },
     ],
     attatchments: "dsf",
+    progress:82,
   },
   {
     name: "project1",
@@ -26,6 +29,8 @@ const adminDataSource = [
       { keyName: "key1", keyValue: "fgdsfdfsfsdfsdsf" },
     ],
     attatchments: "dsf",
+    progress:82,
+
   },
   {
     name: "project1",
@@ -48,6 +53,8 @@ const adminDataSource = [
       { keyName: "key1", keyValue: "fgdsfdfsfsdfsdsf" },
     ],
     attatchments: "dsf fsdddd",
+    progress:82,
+
   },
 ];
 

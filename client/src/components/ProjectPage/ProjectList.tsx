@@ -6,11 +6,11 @@ import React from "react";
 import UserTable from "../UserTable";
 import AdminTable from "../AdminTable";
 
-function ProjectList(props: { userType: string; users: [] }) {
+function ProjectList(props: { userType: string; users: string[] }) {
   const { userType, users } = props;
   return (
     <div style={{ marginTop: 16 }}>
-      {userType === "admin" ? <AdminTable /> : <UserTable />}
+      {userType === "admin" ? <AdminTable userList={users}/> : <UserTable />}
     </div>
   );
 }
