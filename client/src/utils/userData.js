@@ -12,6 +12,7 @@ const userDataSource = [
       { keyName: "key1", keyValue: "fgdsfdfsfsdfsdsf" },
     ],
     attatchments: "dsf",
+    progress: 82,
   },
   {
     name: "project1",
@@ -26,6 +27,7 @@ const userDataSource = [
       { keyName: "key1", keyValue: "fgdsfdfsfsdfsdsf" },
     ],
     attatchments: "dsf",
+    progress: 82,
   },
   {
     name: "project1",
@@ -48,6 +50,7 @@ const userDataSource = [
       { keyName: "key1", keyValue: "fgdsfdfsfsdfsdsf" },
     ],
     attatchments: "dsf fsdddd",
+    progress: 82,
   },
 ];
 

@@ -16,6 +16,8 @@ import SelectMultiple from '../SelectMultiple/';
 import { UploadOutlined, InboxOutlined, SaveOutlined } from '@ant-design/icons';
 import Upload from 'antd/es/upload/Upload';
 import TextArea from 'antd/lib/input/TextArea';
+import { UploadProps } from 'antd/es/upload/Upload';
+
 
 interface NewProjectProps {
     data: {
@@ -37,6 +39,28 @@ function NewProject(props: NewProjectProps) {
     const [comments, setComments] = useState(data.comments || []);
     const [keys, setKeys] = useState(data.keys || []);
 
+    const uploadProps: UploadProps = {
+        action: "http://localhost:3001/upload",
+        name: 'sampleFile',
+        defaultFileList: [
+        ],
+        // onChange({ file, fileList }) {
+        //   if (file.status !== "uploading") {
+        //     console.log(file, fileList);
+        //   }
+        //   file.url = "http://localhost:3001/" + file.name;
+        //   //download the file as follows: get a event from the client to download the file, download the file temporarily and send that file after getting the confirmation 
+        //   // of download, delte that file from temp location
+        // },
+        // onDownload(file) {
+        //   console.log("ondownload clicked", file)
+        // },
+        // onRemove(file) {
+        //   console.log("onremove", file)
+        //   //call server to remove the file from hosting
+        // }
+    };
+
     return (
         <>
             <Form
@@ -49,6 +73,7 @@ function NewProject(props: NewProjectProps) {
                 layout="horizontal"
                 initialValues={{
                 }}
+                onSubmitCapture={(e) => { e.preventDefault() }}
             >
                 <Form.Item label="Name: ">
                     <Input />
@@ -56,16 +81,16 @@ function NewProject(props: NewProjectProps) {
                 <Form.Item label="Assigned To">
                     <SelectMultiple userList={userList} setAssignedTo={setAssignedTo} />
                 </Form.Item>
-
+                {/* 
                 <Form.Item
                     name="upload"
                     label="Attatchments"
                     valuePropName="fileList"
                 >
-                    <Upload name="logo" action="/upload.do" listType="picture">
+                    <Upload  {...uploadProps}>
                         <Button icon={<UploadOutlined />}>Click to upload</Button>
                     </Upload>
-                </Form.Item>
+                </Form.Item> */}
 
                 {/* <Form.Item label="Dragger">
                     <Form.Item name="dragger" valuePropName="fileList" noStyle>
@@ -80,19 +105,22 @@ function NewProject(props: NewProjectProps) {
                 </Form.Item> */}
 
                 <Form.Item label="Comments" >
-                    <TextArea placeholder="Your Comments..." autoSize />
+                    <TextArea placeholder="Your Comments..." autoSize style={{ marginBottom: '14px' }} />
+                    <Button type="primary">Add Comment</Button>
                 </Form.Item>
 
                 <Form.Item label="Keys: ">
                     <Space >
                         <Input placeholder="Key Name" />
                         <Input placeholder="Key Value" />
+                        <Button type="primary">Add</Button>
                     </Space>
-
+                    {//map and show all the keys here
+                    }
                 </Form.Item>
 
                 <Form.Item label="" style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button icon={<SaveOutlined />} type='primary' >Save</Button>
+                    <Button icon={<SaveOutlined />} type='primary' onSubmit={(e) => { e.preventDefault(); console.log('submit called') }}>Save</Button>
                 </Form.Item>
 
             </Form>
