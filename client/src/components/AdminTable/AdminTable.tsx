@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import { Button, Progress, Table } from "antd";
+import { Button, Col, Progress, Row, Table } from "antd";
 import { Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
@@ -167,6 +167,11 @@ function AdminTable(props: { userList: string[] }) {
 
   return (
     <div>
+      <Row >
+        <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Button type="primary" >Create Project</Button>
+        </Col>
+      </Row>
       <Table columns={adminColumns} dataSource={adminDataSource} />
       <Modal title="Project" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <NewProject data={currSelectedRecord} userList={userList} />

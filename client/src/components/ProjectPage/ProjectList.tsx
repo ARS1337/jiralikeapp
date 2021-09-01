@@ -9,7 +9,7 @@ import AdminTable from "../AdminTable";
 function ProjectList(props: { userType: string; users: string[] }) {
   const { userType, users } = props;
   return (
-    <div style={{ marginTop: 16 }}>
+    <div style={{ marginTop: 16, fontFamily:'cursive' }}>
       {userType === "admin" ? <AdminTable userList={users}/> : <UserTable />}
     </div>
   );
