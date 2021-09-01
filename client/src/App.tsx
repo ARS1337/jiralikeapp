@@ -17,18 +17,18 @@ function App() {
       <Layout>
         <Row style={{ backgroundColor: '#d9dce6' }}>
           <Col md={20}>
-            <Header style={{ backgroundColor: '#d9dce6' }}>Jeera
+            <Header style={{ backgroundColor: '#d9dce6' }}><h1>Jeera</h1>
             </Header>
           </Col>
           <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {userType==="admin"?<Button type='primary' >Create Project</Button>:null}
+            {userType==="admin"?<Button type="primary" >Create Project</Button>:null}
           </Col>
         </Row>
         <Content>
           <Row>
             <Col xs={24} sm={24} lg={{ span: 20, offset: 2 }} >
-              {/* <LoginForm /> */}
-              <ProjectList userType={userType} users={users} />
+              <LoginForm />
+              {/* <ProjectList userType={userType} users={users} /> */}
             </Col>
           </Row>
         </Content>
